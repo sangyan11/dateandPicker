@@ -6,19 +6,26 @@
     tools:context=".MainActivity">
 
   <Button
-      android:id="@+id/btnPick"
+      android:id="@+id/btn"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:text="Pick Date and TIme" />
+      android:text="View Date and Time">
+  </Button>
+
   <TextView
-      android:id="@+id/textView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/btnPick"
-      android:layout_centerInParent="true"
+      android:id="@+id/showTime"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:layout_below="@+id/btn"
+
+    android:layout_centerInParent="true"
+      android:layout_marginStart="10dp"
       android:layout_marginTop="10dp"
-      android:textColor="@android:color/background_dark"
-      android:textSize="12sp"
-      android:textStyle="bold" />
+      android:layout_marginEnd="10dp"
+      android:layout_marginBottom="10dp"
+      android:text="00:00"
+      android:textAlignment="center" />
+
+
 </RelativeLayout>

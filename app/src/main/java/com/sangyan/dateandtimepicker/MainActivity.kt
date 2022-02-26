@@ -10,54 +10,60 @@ import android.text.format.DateFormat.is24HourFormat
 import android.widget.DatePicker
 import android.widget.TimePicker
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.Month
 
 import java.time.Year
 import java.util.*
 
-class MainActivity : AppCompatActivity() , TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+class MainActivity : AppCompatActivity() , TimePickerDialog.OnTimeSetListener , DatePickerDialog .OnDateSetListener{
+    var hours = 0
+    var minutes = 0
     var day = 0
-    var month : Int  =0
-    var year : Int= 0
-    var hour :Int = 0
-    var minute = 0
-    var myDay = 0
-    var myMonth : Int = 0
-    var myYear : Int = 0
-    var myHour = 0
-    var myMinute =0
-
-
-
+    var month = 0
+    var year = 0
+    var myHours : Int = 0
+    var myMinutes : Int= 0
+    var myDay : Int = 0
+    var myMonth  :Int = 0
+    var myYear :Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btnPick.setOnClickListener{
-            val calendar: Calendar = Calendar.getInstance()
-      hour = calendar.get(Calendar.HOUR)
-       minute = calendar.get(Calendar.MINUTE)
 
-            val timePickerDialog = TimePickerDialog(this@MainActivity, this@MainActivity, hour, minute,
-                DateFormat.is24HourFormat(this))
-            timePickerDialog.show()
+        btn.setOnClickListener{
+            val calender = Calendar.getInstance()
+            day = calender.get(Calendar.DAY_OF_MONTH)
+            month = calender.get(Calendar.MONTH)
+            year = calender.get(Calendar.YEAR)
+            var datePickerDialog = DatePickerDialog(this,this,day,month,year)
+            datePickerDialog.show()
+
         }
+
+
     }
 
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        myDay = day
-        myYear = year
+    override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
+        myHours = hour
+        myMinutes = minute
+        showTime.text = "Day:" + myDay + "\n"
+                "Month:"+ myMonth + "\n"
+                "Year:"+ myYear+ "\n"
+                "Hours: " + myHours + "\n" +
+                        "Minutes:" +  myMinutes + "\n"
+
+    }
+
+    override fun onDateSet(vire: DatePicker?, year: Int, month: Int, dayofMonth: Int) {
+         myDay = dayofMonth
         myMonth = month
-        val calendar: Calendar = Calendar.getInstance()
-        hour = calendar.get(Calendar.HOUR)
-        minute = calendar.get(Calendar.MINUTE)
-        val timePickerDialog = TimePickerDialog(this@MainActivity, this@MainActivity, hour, minute,
-            DateFormat.is24HourFormat(this))
+        myYear = year
+        val calendar = Calendar.getInstance()
+        hours = calendar.get(Calendar.HOUR)
+        minutes = calendar.get(Calendar.MINUTE)
+        val timePickerDialog = TimePickerDialog(this,this,hours,minutes,true)
         timePickerDialog.show()
-    }
-
-    override fun onTimeSet(view: TimePicker?, hourOfDay : Int, p2: Int) {
-      myHour = hourOfDay
-        myMinute = minute
-      textView.text = "Hour : $myHour\nMinute : $myMinute\n"
 
     }
+
 }
